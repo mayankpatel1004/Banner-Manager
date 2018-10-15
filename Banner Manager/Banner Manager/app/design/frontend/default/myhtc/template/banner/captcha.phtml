@@ -1,0 +1,10 @@
+<?php
+$strGenerateRandomNumber = $this->fnGetRandomString(3,'alpha');
+$strSiteUrl = Mage::getStoreConfig('web/unsecure/base_url');
+$strCaptchaImageUrl = $strSiteUrl.'captchaimage.php';
+?>
+<div class="recaptcha_container">
+	<input type="hidden" name="hdnCaptchaCode" id="hdnCaptchaCode" value="<?php echo $strGenerateRandomNumber;?>" />
+	<img src="<?php echo $strCaptchaImageUrl; ?>?random=<?php echo $strGenerateRandomNumber; ?>" />
+	<input type="text" name="txtVerificationCode" id="txtVerificationCode" />
+</div>

@@ -1,0 +1,19 @@
+<?php
+$objPromoBanner = $this->getRightPromoBanners();
+if($objPromoBanner->count())
+{
+	foreach($objPromoBanner as $objBanner)
+	{
+		$arrSize = $this->getImageSize($objBanner, 150, 266);
+		
+			
+		$strBannerUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'banners/'.$objBanner->getFilename();
+		$strBannerLink = $this->fnFilterBannerLink($objBanner->getContent())
+		?>
+			<a href="<?php echo $strBannerLink; ?>" title="<?php echo $objBanner->getTitle(); ?>">
+				<img src="<?php echo $strBannerUrl; ?>" style="width:<?php echo $arrSize[0]; ?>px; height:<?php echo $arrSize[1]; ?>px;" title="<?php echo $objBanner->getTitle(); ?>" alt="<?php echo $objBanner->getTitle(); ?>" />
+			</a>
+		<?php
+	}
+}
+?>

@@ -1,0 +1,63 @@
+<?php
+if(Mage::getSingleton('cms/page')->getIdentifier() == 'home' && Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms' ){
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cycle.js'); ?>"></script>
+<?php
+}
+?>
+<?php
+if(Mage::getSingleton('cms/page')->getIdentifier() == 'home' && Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms' )
+{
+	$objBanners = $this->getBanners();
+	if($objBanners->count())
+	{
+	?>
+	<div class="mt15"></div>
+	<div class="banner urban-banner" id="slideshow">
+	  <div class="slideshow urban-slideshow" id="banner-image">
+		<?php
+	foreach($objBanners as $objBanner)
+	{	
+	$strBannerUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'banners/'.$objBanner->getFilename();		
+	$strBannerLink = $this->getBannerUrl($objBanner->getLinkUrl());		
+	if($strBannerLink != '')
+	{
+	?>
+		<a <?php /*?>href="<?php echo $strBannerLink; ?>"<?php */?> title="<?php echo $objBanner->getTitle(); ?>" onclick='window.open("<?php echo $strBannerLink; ?>")'>
+		<?php
+	}
+	?>
+		<img style="width:648px; height:342px;" src="<?php echo $strBannerUrl; ?>" title="<?php echo $objBanner->getTitle(); ?>" alt="<?php echo $objBanner->getTitle(); ?>" />
+		<?php
+	if($strBannerLink != '')
+	{
+	?>
+		</a>
+		<?php
+	}		
+	}
+	?>
+	  </div>
+	</div>
+	<div><ul id="banner-slider" class="banner-slider"></ul></div>		
+	<script type="text/javascript">			
+	jQuery.noConflict();
+	jQuery(document).ready(function() {
+		jQuery('#banner-image').cycle({
+			fx:'fade',
+			timeout:4000,
+			pager:'#banner-slider',
+			pagerAnchorBuilder: function(idx, slide) 
+			{ 
+				return '<li><a href="#"></a></li>'; 
+			} 																		
+		});
+	});
+	</script>
+	<div class="clear"></div>
+	<?php
+	}
+}
+?>
+<div class="mb15"></div>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>		
+		<reference name="header">
+			<block type="banner/banner" name="header_banner" template="banner/banner.phtml" />
+		</reference>
+		<reference name="right">
+			<block type="cms/block" name="top_right_block">
+				<action method="setBlockId"><block_id>top_right_column</block_id></action>
+			</block>
+		</reference>
+	</default>
+    <banner_index_index>
+    </banner_index_index>	
+</layout> 
